@@ -81,7 +81,6 @@ public class CarritoActivity extends AppCompatActivity {
                 pedido.setPerfil(perfil);
                 pedido.setCarrito(Utils.obtenCarrito(this));
                 Firebase ref = Utils.getFirebase().child("pedidos")
-                        .child(pedido.getPerfil().getEmail().replace(".", ","))
                         .child(pedido.getId());
 
                 ref.setValue(pedido);
