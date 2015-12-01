@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="itson.sushivan.CarritoActivity"
+    android:id="@+id/coord_layout">
+
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:padding="16dp"
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/subtotal"
+                android:layout_marginBottom="16dp"
+                android:textSize="20sp"
+                android:text="Subtotal: $ 4 189 MXN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/iva"
+                android:layout_marginBottom="16dp"
+                android:textSize="20sp"
+                android:text="IVA: $ 10 MXN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/total"
+                android:layout_marginBottom="16dp"
+                android:textSize="20sp"
+                android:text="Total: $ 10 MXN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:layout_below="@id/layout"
+            android:id="@+id/no_productos"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:text="No tienes productos en el carrito"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_below="@id/no_productos"
+            android:id="@+id/carrito_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
