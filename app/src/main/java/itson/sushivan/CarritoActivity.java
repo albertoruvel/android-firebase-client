@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.firebase.client.Firebase;
@@ -18,6 +19,7 @@ import com.firebase.client.Firebase;
 import itson.sushivan.adapter.CarritoAdapter;
 import itson.sushivan.modelo.Pedido;
 import itson.sushivan.modelo.Perfil;
+import itson.sushivan.modelo.Producto;
 
 public class CarritoActivity extends AppCompatActivity {
 
@@ -26,7 +28,7 @@ public class CarritoActivity extends AppCompatActivity {
     private CarritoAdapter adapter;
     private TextView textView, subtotal, iva, total;
     private CoordinatorLayout coordLayout;
-
+    private LinearLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +43,15 @@ public class CarritoActivity extends AppCompatActivity {
         subtotal = (TextView)findViewById(R.id.subtotal);
         iva = (TextView)findViewById(R.id.iva);
         total = (TextView)findViewById(R.id.total);
+        layout = (LinearLayout)findViewById(R.id.layout);
 
         //checha si hay productos en el carrito
         if(Utils.obtenCarrito(this) == null || Utils.obtenCarrito(this).isEmpty()){
             //muestra un snackbar
             recyclerView.setVisibility(View.GONE);
             textView.setVisibility(View.VISIBLE);
+            layout.setVisibility(View.GONE);
+
         }else{
             adapter = new CarritoAdapter(this);
             recyclerView.setAdapter(adapter);
@@ -64,7 +69,9 @@ public class CarritoActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.carrito, menu);
+        if(Utils.obtenCarrito(this) != null && ! Utils.obtenCarrito(this).isEmpty()){
+            getMenuInflater().inflate(R.menu.carrito, menu);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -80,7 +87,12 @@ public class CarritoActivity extends AppCompatActivity {
                     perfil = new Perfil();
                 pedido.setPerfil(perfil);
                 pedido.setCarrito(Utils.obtenCarrito(this));
-                Firebase ref = Utils.getFirebase().child("pedidos")
+                //agrega el id del pedido
+                for(Producto p : pedido.getCarrito())
+                        p.setPedidoId(pedido.getId());
+                //agrega el pedido completo al nodo pedidos
+                Firebase ref = Utils.getFirebase()
+                        .child("pedidos")
                         .child(pedido.getId());
 
                 ref.setValue(pedido);

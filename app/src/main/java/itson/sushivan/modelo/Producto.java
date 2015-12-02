@@ -9,6 +9,7 @@ public class Producto {
     private String ingredientePrincipal;
     private String descripcion;
     private double costo;
+    private String pedidoId; 
 
     public Producto(int imagen, String titulo, String ingredientePrincipal, String descripcion, double costo) {
         this.imagen = imagen;
@@ -56,5 +57,13 @@ public class Producto {
 
     public void setCosto(double costo) {
         this.costo = costo;
+    }
+
+    public void setPedidoId(String pedidoId){
+        this.pedidoId = pedidoId; 
+    }
+
+    public String getPedidoId(){
+        return this.pedidoId; 
     }
 }

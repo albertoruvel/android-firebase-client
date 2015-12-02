@@ -10,6 +10,7 @@ public class Pedido {
     private String id;
     private Perfil perfil;
     private List<Producto> carrito;
+    private boolean entregado;
 
     public Pedido() {
         id = UUID.randomUUID().toString();
@@ -37,5 +38,13 @@ public class Pedido {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public boolean isEntregado() {
+        return entregado;
+    }
+
+    public void setEntregado(boolean entregado) {
+        this.entregado = entregado;
     }
 }

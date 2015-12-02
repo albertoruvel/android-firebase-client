@@ -29,6 +29,11 @@
         </activity>
         <activity android:name=".CarritoActivity" >
         </activity>
+
+        <service
+            android:name=".CambioPedidoService"
+            android:exported="false" >
+        </service>
     </application>
 
 </manifest>
